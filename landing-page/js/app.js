@@ -35,6 +35,30 @@
 
 // build the nav
 
+let ul = document.getElementById('navbar__list');
+
+for (let i = 1; i < 4; i++){
+
+   let li =  document.createElement('li');
+
+   li.innerHTML = '<a href="#" class="menu__link">section + i</a>';
+
+   
+   ul.appendChild(li);
+
+
+}
+
+
+
+/*let li = document.createElement('li');
+
+li.innerHTML = '<a href="#" class="menu__link">section1</a>'; 
+
+ul.append(li);*/
+
+
+
 
 // Add class 'active' to section when near top of viewport
 
