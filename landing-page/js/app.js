@@ -65,6 +65,33 @@ ul.append(li);*/
 
 // Scroll to anchor ID using scrollTO event
 
+// scroll to top button
+
+const scrollToTop = document.querySelector(".scroll-to-top");
+
+window.addEventListener('scroll', ()=> {
+
+    scrollToTop.classList.toggle('showed', window.pageYOffset > 100);
+
+})
+
+/*function goUp (){
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+    })
+}
+*/
+
+scrollToTop.addEventListener('click', () => {
+   window.scrollTo({
+      top:0,
+      behavior: 'smooth',
+
+   })
+
+})
+
 
 /**
  * End Main Functions
