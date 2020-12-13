@@ -8,6 +8,10 @@
  *
 */
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* ---- Base Rules ---- */
 body {
   background: rgb(136, 203, 171);
@@ -245,4 +249,26 @@ section.your-active-class .landing__container::after {
   to {
     transform: rotate(360deg) translate(-1em) rotate(-360deg);
   }
+}
+
+.scroll-to-top {
+  width: 50px;
+  height: 50px;
+  position: fixed;
+  right: 20px;
+  bottom: 32px;
+  border-radius: 50%;
+  background-color: #ccc;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 26px;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.5s;
+}
+
+.scroll-to-top.showed {
+  opacity: 1;
 }
