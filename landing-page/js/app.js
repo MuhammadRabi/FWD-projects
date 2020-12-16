@@ -26,6 +26,12 @@
 */
 
 
+const navBarMenu = document.querySelector('.navbar__menu');
+
+// my ul
+const navBarList = document.getElementById('navbar__list');
+
+const fragment = document.createDocumentFragment();
 
 /**
  * End Helper Functions
@@ -35,29 +41,31 @@
 
 // build the nav
 
-let ul = document.getElementById('navbar__list');
+let mySection = document.querySelectorAll('section');
 
-for (let i = 1; i < 4; i++){
-
-   let li =  document.createElement('li');
-
-   li.innerHTML = '<a href="#" class="menu__link">section + i</a>';
-
-   
-   ul.appendChild(li);
-
-
-}
+mySection.forEach(section => {
+    const myList = document.createElement('li');
+    const myLink = document.createElement('a');
+    myLink.addEventListener('click', ()=> {
+        section.scrollIntoView({
+            'behavior': "smooth"
+        })
+    })
 
 
-
-/*let li = document.createElement('li');
-
-li.innerHTML = '<a href="#" class="menu__link">section1</a>'; 
-
-ul.append(li);*/
+    let secName = section.getAttribute('data-nav');
+    let linkText = document.createTextNode(secName);
 
 
+    myLink.appendChild(linkText);
+    myList.appendChild(myLink);
+    fragment.appendChild(myList);
+
+
+
+})
+
+navBarList.appendChild(fragment);
 
 
 // Add class 'active' to section when near top of viewport
@@ -74,14 +82,6 @@ window.addEventListener('scroll', ()=> {
     scrollToTop.classList.toggle('showed', window.pageYOffset > 100);
 
 })
-
-/*function goUp (){
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-    })
-}
-*/
 
 scrollToTop.addEventListener('click', () => {
    window.scrollTo({
