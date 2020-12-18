@@ -31,37 +31,39 @@ const navBarMenu = document.querySelector('.navbar__menu');
 // my ul
 const navBarList = document.getElementById('navbar__list');
 
+// using createDocumentFragment for better performance
 const fragment = document.createDocumentFragment();
-
 /**
  * End Helper Functions
  * Begin Main Functions
  * 
 */
-
 // build the nav
 
+// identifing the section element to loop on it
 let mySection = document.querySelectorAll('section');
 
+// my forEach loop
 mySection.forEach(section => {
     const myList = document.createElement('li');
     const myLink = document.createElement('a');
-    myLink.addEventListener('click', ()=> {
-        section.scrollIntoView({
+  // Scroll to section on link click
+    myLink.addEventListener('click', (e) => {
+  // prevent default action of anchor link
+        e.preventDefault();
+       section.scrollIntoView({
             'behavior': "smooth"
         })
     })
 
 
-    let secName = section.getAttribute('data-nav');
-    let linkText = document.createTextNode(secName);
+    let linkText = section.getAttribute('data-nav');
+    let secName = document.createTextNode(linkText);
 
-
-    myLink.appendChild(linkText);
+    myLink.setAttribute('id', linkText);  
+    myLink.appendChild(secName);
     myList.appendChild(myLink);
     fragment.appendChild(myList);
-
-
 
 })
 
@@ -79,10 +81,11 @@ const scrollToTop = document.querySelector(".scroll-to-top");
 
 window.addEventListener('scroll', ()=> {
 
+// when scrolling the button will be active 
     scrollToTop.classList.toggle('showed', window.pageYOffset > 100);
 
 })
-
+// clicking the button will make top = 0 and going up
 scrollToTop.addEventListener('click', () => {
    window.scrollTo({
       top:0,
@@ -101,8 +104,54 @@ scrollToTop.addEventListener('click', () => {
 
 // Build menu 
 
-// Scroll to section on link click
 
 // Set sections as active
+ document.addEventListener('scroll', () =>{
 
+    mySection.forEach(section => {
+
+    // identifing getBounding to determine which section in the viewport    
+    let rect = section.getBoundingClientRect();
+
+    if (rect.top <= 150 && rect.bottom >= 150) {
+    // to remove any previously found active class on section    
+        mySection.forEach(section => {
+            
+            section.classList.remove('your-active-class');
+        })
+
+    // if the section in viewport, it will be highlited by active class
+
+    section.classList.add('your-active-class');
+} 
+
+    let secID = section.getAttribute('data-nav');
+    let links = document.querySelectorAll('a');
+
+// to highlight active links
+
+    links.forEach(link => {
+
+    if (secID == link.textContent) {
+
+   // add active class if section data-nav is the same as Link ID
+        links.forEach(l => {
+   // must remove any active link previously found         
+         l.classList.remove('active-link');
+        })
+
+        link.classList.add('active-link');
+         
+    } else {
+   // remove active class if not
+        link.classList.remove('active-link');
+
+    }
+})
+
+
+    })
+
+  
+})
 
