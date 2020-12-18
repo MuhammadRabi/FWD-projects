@@ -101,9 +101,8 @@ scrollToTop.addEventListener('click', () => {
  * Begin Events
  * 
 */
-
 // Build menu 
-
+    let links = document.querySelectorAll('a');
 
 // Set sections as active
  document.addEventListener('scroll', () =>{
@@ -113,45 +112,45 @@ scrollToTop.addEventListener('click', () => {
     // identifing getBounding to determine which section in the viewport    
     let rect = section.getBoundingClientRect();
 
-    if (rect.top <= 150 && rect.bottom >= 150) {
-    // to remove any previously found active class on section    
-        mySection.forEach(section => {
-            
-            section.classList.remove('your-active-class');
-        })
+        if (rect.top <= 150 && rect.bottom >= 150) {
+        // to remove any previously found active class on section    
+            mySection.forEach(section => {
+                
+                section.classList.remove('your-active-class');
+            })
 
-    // if the section in viewport, it will be highlited by active class
+        // if the section in viewport, it will be highlited by active class
 
-    section.classList.add('your-active-class');
-} 
-
-    let secID = section.getAttribute('data-nav');
-    let links = document.querySelectorAll('a');
+        section.classList.add('your-active-class');
+    } 
 
 // to highlight active links
 
-    links.forEach(link => {
+   links.forEach(link => {
 
-    if (secID == link.textContent) {
+    let checkNav = section.getAttribute('data-nav');
 
+    if (checkNav == link.textContent) {
    // add active class if section data-nav is the same as Link ID
         links.forEach(l => {
    // must remove any active link previously found         
          l.classList.remove('active-link');
-        })
+                  console.log("the class was removed");
+
+        });
 
         link.classList.add('active-link');
-         
-    } else {
+                 console.log("the class was added");
+
+    } 
+    
+    /*else {
    // remove active class if not
         link.classList.remove('active-link');
 
-    }
+    }*/
 })
 
-
-    })
-
-  
+    })  
 })
 
