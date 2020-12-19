@@ -44,7 +44,9 @@ const fragment = document.createDocumentFragment();
 let mySection = document.querySelectorAll('section');
 
 // my forEach loop
-mySection.forEach(section => {
+function createNavbar() {
+
+    mySection.forEach(section => {
     const myList = document.createElement('li');
     const myLink = document.createElement('a');
   // Scroll to section on link click
@@ -68,8 +70,9 @@ mySection.forEach(section => {
 })
 
 navBarList.appendChild(fragment);
+}
 
-
+createNavbar();
 // Add class 'active' to section when near top of viewport
 
 
@@ -114,43 +117,35 @@ scrollToTop.addEventListener('click', () => {
 
         if (rect.top <= 150 && rect.bottom >= 150) {
         // to remove any previously found active class on section    
-            mySection.forEach(section => {
-                
-                section.classList.remove('your-active-class');
-            })
+           
+                section.classList.add('your-active-class');
+            
 
         // if the section in viewport, it will be highlited by active class
 
-        section.classList.add('your-active-class');
-    } 
+    } else {
+                section.classList.remove('your-active-class');
 
-// to highlight active links
+    }
 
-   links.forEach(link => {
-
-    let checkNav = section.getAttribute('data-nav');
-
-    if (checkNav == link.textContent) {
-   // add active class if section data-nav is the same as Link ID
-        links.forEach(l => {
-   // must remove any active link previously found         
-         l.classList.remove('active-link');
-                  console.log("the class was removed");
-
-        });
-
-        link.classList.add('active-link');
-                 console.log("the class was added");
-
-    } 
-    
-    /*else {
-   // remove active class if not
-        link.classList.remove('active-link');
-
-    }*/
 })
 
     })  
-})
 
+
+// to highlight active links
+
+
+
+let navLink = document.querySelectorAll('li a');
+
+// for each anchor add eventlistener Click
+navLink.forEach(nvlnk=> nvlnk.addEventListener('click', (e)=>{
+
+// make sure to remove active class if found
+      navLink.forEach(n=>{
+      n.classList.remove('active-link');
+    })
+     e.target.classList.add('active-link');
+})
+)
