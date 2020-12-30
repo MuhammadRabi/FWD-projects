@@ -9,7 +9,7 @@ let currentDate =
   dateNew.getDate() +
   "." +
   dateNew.getFullYear();
-const myApiKey = "&appid=be83ab30c496c62c32ab82e92bef048b";
+const myApiKey = "&appid=be83ab30c496c62c32ab82e92bef048b&units=metric";
 const myBaseURL = "http://api.openweathermap.org/data/2.5/weather?zip=";
 
 // adding the eventlistener when click generate trigger data retreival
@@ -71,7 +71,7 @@ const updateUi = async () => {
     document.getElementById("date").innerHTML = `Date is ${allData[0].date}`;
     document.getElementById(
       "temp"
-    ).innerHTML = `Temperature is ${allData[0].temp}`;
+    ).innerHTML = `Temperature is ${allData[0].temp} celsius`;
     document.getElementById(
       "content"
     ).innerHTML = `I feel ${allData[0].content}`;
